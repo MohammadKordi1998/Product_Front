@@ -14,8 +14,10 @@ const DataUser = () => {
       })
       .then(
         (result) => {
-          if (result.status_code == 200) {
-            setData(result.result);
+          if (result) {
+            if (result.status_code == 200) {
+              setData(result.result);
+            }
           }
         },
 

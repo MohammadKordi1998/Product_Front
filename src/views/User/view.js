@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 import {
   CRow,
@@ -48,6 +49,14 @@ const ViewUser = (props) => {
       filter: false,
     },
   ];
+
+  const deleteUser = (id) => {
+    const deleted = [...data];
+    const findIndex = deleted.findIndex((e) => e.id == id);
+    deleted.splice(findIndex, 1);
+
+    setData(deleted);
+  };
 
   return (
     <Fragment>
@@ -104,7 +113,12 @@ const ViewUser = (props) => {
                           <CButton size="sm" color="info">
                             User Settings
                           </CButton>
-                          <CButton size="sm" color="danger" className="ml-1">
+                          <CButton
+                            size="sm"
+                            color="danger"
+                            className="ml-1"
+                            onClick={() => deleteUser(item.id)}
+                          >
                             Delete
                           </CButton>
                         </CCardBody>
