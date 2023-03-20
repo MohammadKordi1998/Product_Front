@@ -11,11 +11,11 @@ import {
   CCardHeader,
   CCardFooter,
 } from "@coreui/react";
+import i18n from "src/i18n";
 import useData from "./data";
-import { withNamespaces } from "react-i18next";
 import React, { Fragment, useEffect, useState } from "react";
 
-const ViewUser = ({ t }, props) => {
+const ViewUser = (props) => {
   const [data, setData] = useData();
   const [details, setDetails] = useState([]);
   const toggleDetails = (index) => {
@@ -30,12 +30,16 @@ const ViewUser = ({ t }, props) => {
   };
 
   const fields = [
-    { key: "username", _style: { width: "17%" }, label: t("UserName") },
-    { key: "first_name", _style: { width: "17%" }, label: t("first_name") },
-    { key: "last_name", _style: { width: "17%" }, label: t("last_name") },
-    { key: "mobile", _style: { width: "17%" }, label: t("mobile") },
-    { key: "email", _style: { width: "17%" }, label: t("email") },
-    { key: "role", _style: { width: "17%" }, label: t("role") },
+    { key: "username", _style: { width: "17%" }, label: i18n.t("UserName") },
+    {
+      key: "first_name",
+      _style: { width: "17%" },
+      label: i18n.t("first_name"),
+    },
+    { key: "last_name", _style: { width: "17%" }, label: i18n.t("last_name") },
+    { key: "mobile", _style: { width: "17%" }, label: i18n.t("mobile") },
+    { key: "email", _style: { width: "17%" }, label: i18n.t("email") },
+    { key: "role", _style: { width: "17%" }, label: i18n.t("role") },
     {
       key: "show_details",
       label: "",
@@ -82,7 +86,9 @@ const ViewUser = ({ t }, props) => {
                             toggleDetails(index);
                           }}
                         >
-                          {details.includes(index) ? t("Hide") : t("Show")}
+                          {details.includes(index)
+                            ? i18n.t("Hide")
+                            : i18n.t("Show")}
                         </CButton>
                       </td>
                     );
@@ -110,7 +116,7 @@ const ViewUser = ({ t }, props) => {
             </CCardBody>
             <CCardFooter>
               <CButton block color="info" variant="ghost">
-                {t("Create")}
+                {i18n.t("Create")}
               </CButton>
             </CCardFooter>
           </CCard>
@@ -120,4 +126,4 @@ const ViewUser = ({ t }, props) => {
   );
 };
 
-export default withNamespaces()(ViewUser);
+export default ViewUser;

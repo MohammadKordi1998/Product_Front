@@ -14,7 +14,6 @@ import {
 } from "@coreui/react";
 import "./scss/style.scss";
 import React, { Fragment } from "react";
-import { withNamespaces } from "react-i18next";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 const loading = (
@@ -74,4 +73,4 @@ const App = ({ t }) => {
   );
 };
 
-export default withNamespaces()(App);
+export default App;
