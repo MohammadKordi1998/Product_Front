@@ -1,42 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import i18n from "src/i18n";
 import CIcon from "@coreui/icons-react";
+import React, { useEffect, useState } from "react";
 
-const _nav = [
-  // {
-  //   _tag: "CSidebarNavItem",
-  //   name: "Dashboard",
-  //   to: "/dashboard",
-  //   icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-  //   badge: {
-  //     color: "info",
-  //     text: "NEW",
-  //   },
-  // },
-  // {
-  //   _tag: "CSidebarNavTitle",
-  //   _children: ["Theme"],
-  // },
-  {
-    _tag: "CSidebarNavItem",
-    name: "User",
-    to: "/users",
-    icon: "cil-user",
-  },
+const _nav = (t) => {
+  const [nav, setnav] = useState();
 
-  // {
-  //   _tag: "CSidebarNavDropdown",
-  //   name: "Base",
-  //   route: "/base",
-  //   icon: "cil-puzzle",
-  //   _children: [
-  //     {
-  //       _tag: "CSidebarNavItem",
-  //       name: "Breadcrumb",
-  //       to: "/base/breadcrumbs",
-  //     },
-  //   ],
-  // },
-];
+  useEffect(() => {
+    setnav([
+      {
+        _tag: "CSidebarNavItem",
+        name: i18n.t("Users"),
+        to: "/users",
+        icon: "cil-user",
+      },
+    ]);
+  }, []);
+
+  return [nav];
+};
 
 export default _nav;

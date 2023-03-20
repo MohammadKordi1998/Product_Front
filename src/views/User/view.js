@@ -30,12 +30,12 @@ const ViewUser = ({ t }, props) => {
   };
 
   const fields = [
-    { key: "username", _style: { width: "17%" }, label: "user" },
-    { key: "first_name", _style: { width: "17%" } },
-    { key: "last_name", _style: { width: "17%" } },
-    { key: "mobile", _style: { width: "17%" } },
-    { key: "email", _style: { width: "17%" } },
-    { key: "role", _style: { width: "17%" } },
+    { key: "username", _style: { width: "17%" }, label: t("UserName") },
+    { key: "first_name", _style: { width: "17%" }, label: t("first_name") },
+    { key: "last_name", _style: { width: "17%" }, label: t("last_name") },
+    { key: "mobile", _style: { width: "17%" }, label: t("mobile") },
+    { key: "email", _style: { width: "17%" }, label: t("email") },
+    { key: "role", _style: { width: "17%" }, label: t("role") },
     {
       key: "show_details",
       label: "",
@@ -82,7 +82,7 @@ const ViewUser = ({ t }, props) => {
                             toggleDetails(index);
                           }}
                         >
-                          {details.includes(index) ? "Hide" : "Show"}
+                          {details.includes(index) ? t("Hide") : t("Show")}
                         </CButton>
                       </td>
                     );

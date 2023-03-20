@@ -14,6 +14,7 @@ import {
 } from "@coreui/react";
 import "./scss/style.scss";
 import React, { Fragment } from "react";
+import { withNamespaces } from "react-i18next";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 const loading = (
@@ -31,7 +32,7 @@ const Register = React.lazy(() => import("./views/pages/register/Register"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
 
-const App = () => {
+const App = ({ t }) => {
   return (
     <Fragment>
       <HashRouter>
@@ -73,4 +74,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withNamespaces()(App);
