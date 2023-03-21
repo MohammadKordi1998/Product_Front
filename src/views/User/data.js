@@ -5,8 +5,12 @@ import React, { useEffect, useState } from "react";
 
 const DataUser = () => {
   const [data, setData] = useState([]);
-  useEffect(async () => {
-    await fetch("users/")
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+  useEffect(() => {
+    fetch("users/", requestOptions)
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           return res.json();

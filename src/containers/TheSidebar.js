@@ -1,19 +1,20 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+/* eslint-disable no-unused-vars */
 import {
-  CCreateElement,
+  CImg,
   CSidebar,
-  CSidebarBrand,
   CSidebarNav,
-  CSidebarNavDivider,
+  CSidebarBrand,
+  CCreateElement,
+  CSidebarNavItem,
   CSidebarNavTitle,
   CSidebarMinimizer,
+  CSidebarNavDivider,
   CSidebarNavDropdown,
-  CSidebarNavItem,
 } from "@coreui/react";
-
+import React from "react";
 import CIcon from "@coreui/icons-react";
-
+import LogoImage from "../image/Logo/p.webp";
+import { useSelector, useDispatch } from "react-redux";
 // sidebar nav config
 import navigation from "./_nav";
 
@@ -27,7 +28,19 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
+        <CImg
+          className="c-sidebar-brand-full"
+          src={LogoImage}
+          height={"100"}
+          fluid
+        />
+        <CImg
+          className="c-sidebar-brand-minimized"
+          src={LogoImage}
+          height={"100"}
+          fluid
+        />
+        {/* <CIcon
           className="c-sidebar-brand-full"
           name="logo-negative"
           height={35}
@@ -36,7 +49,7 @@ const TheSidebar = () => {
           className="c-sidebar-brand-minimized"
           name="sygnet"
           height={35}
-        />
+        /> */}
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement

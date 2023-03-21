@@ -1,4 +1,5 @@
 {
+  "lang": "FA",
   "Create": "ایجاد",
   "Edit": "ویرایش",
   "Show": "نمایش",
@@ -6,5 +7,14 @@
   "UserName": "نام کاربری",
   "first_name": "نام",
   "last_name": "نام خانوادگی",
-  "Users": "کاربران"
+  "Users": "کاربران",
+  "Home": "خانه",
+  "NO": "خیر",
+  "Yes": "بله",
+  "Delete": "حذف",
+  "textDelete": "آیا {{value}} حذف شود؟",
+  "Date of registration": "تاریخ ثبت نام",
+  "mobile": "شماره موبایل",
+  "email": "ایمیل",
+  "role": "نقش"
 }

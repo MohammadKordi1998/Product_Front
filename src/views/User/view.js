@@ -4,28 +4,44 @@ import {
   CRow,
   CCol,
   CCard,
+  CAlert,
   CBadge,
   CButton,
   CCardBody,
   CCollapse,
   CDataTable,
-  CCardHeader,
   CCardFooter,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
 } from "@coreui/react";
 import i18n from "src/i18n";
 import useData from "./data";
-import React, { Fragment, useEffect, useState } from "react";
+import Moment from "react-moment";
+import moment from "jalali-moment";
+import CIcon from "@coreui/icons-react";
+import React, { Fragment, useState } from "react";
 
 const ViewUser = (props) => {
+  // start MomentJS
+  moment.locale("fa");
+  // End MomentJS
   const [data, setData] = useData();
   const [details, setDetails] = useState([]);
+  // Start State Delete
+  const [isDeleted, setIsDeleted] = useState();
+  const [modalDelete, setModalDelete] = useState();
+  const [visibleDelete, setVisibleDelete] = useState(0);
+  // End State Delete
   const toggleDetails = (index) => {
     const position = details.indexOf(index);
     let newDetails = details.slice();
     if (position !== -1) {
       newDetails.splice(position, 1);
     } else {
-      newDetails = [...details, index];
+      newDetails = [details, index];
     }
     setDetails(newDetails);
   };
@@ -51,19 +67,69 @@ const ViewUser = (props) => {
   ];
 
   const deleteUser = (id) => {
+    // const requestOptions = {
+    //   method: "DELETE",
+    //   headers: { "Content-Type": "application/json" },
+    // };
+    // fetch("users/" + id, requestOptions).then((res) => {
+    //   if (res.status >= 200 && res.status < 300) {
+    //     const deleted = [...data];
+    //     const findIndex = deleted.findIndex((e) => e.id == id);
+    //     deleted.splice(findIndex, 1);
+
+    //     setData(deleted);
+    //     setIsDeleted(true);
+    //     setVisibleDelete(2);
+    //   } else {
+    //     setIsDeleted(false);
+    //     setVisibleDelete(2);
+    //   }
+    // });
     const deleted = [...data];
     const findIndex = deleted.findIndex((e) => e.id == id);
     deleted.splice(findIndex, 1);
 
     setData(deleted);
+    setIsDeleted(true);
+    setVisibleDelete(2);
   };
 
   return (
     <Fragment>
+      {isDeleted == true && (
+        <Fragment>
+          {/* Start Alert Delete */}
+          <CAlert
+            CAlert
+            color="success"
+            show={visibleDelete}
+            closeButton
+            onShowChange={setVisibleDelete}
+          >
+            <CIcon name="cil-check" size="sm" /> حذف شد
+          </CAlert>
+          {/* End Alert Delete */}
+        </Fragment>
+      )}
+
+      {isDeleted == false && (
+        <Fragment>
+          {/* Start Alert Delete */}
+          <CAlert
+            CAlert
+            color="danger"
+            show={visibleDelete}
+            closeButton
+            onShowChange={setVisibleDelete}
+          >
+            <CIcon name="cil-warning" size="sm" /> حذف نشد
+          </CAlert>
+          {/* End Alert Delete */}
+        </Fragment>
+      )}
       <CRow>
         <CCol xs="12" lg="12">
           <CCard>
-            <CCardHeader></CCardHeader>
             <CCardBody>
               <CDataTable
                 items={data}
@@ -87,7 +153,6 @@ const ViewUser = (props) => {
                     return (
                       <td className="py-2">
                         <CButton
-                          color="primary"
                           variant="ghost"
                           shape="pill"
                           size="sm"
@@ -108,20 +173,69 @@ const ViewUser = (props) => {
                         <CCardBody>
                           <h4>{item.username}</h4>
                           <p className="text-muted">
-                            User since: {item.registered}
+                            {i18n.t("Date of registration")} :{" "}
+                            {i18n.t("lang") == "FA" && (
+                              <Fragment>
+                                <Moment locale="FA" format="YYYY/MM/DD">
+                                  {moment
+                                    .from(item.registered, "en", "YYYY/MM/DD")
+                                    .format()}
+                                </Moment>
+                              </Fragment>
+                            )}
+                            {i18n.t("lang") == "EN" && (
+                              <Fragment>
+                                <Moment locale="FA" format="YYYY/MM/DD">
+                                  {item.registered}
+                                </Moment>
+                              </Fragment>
+                            )}
                           </p>
                           <CButton size="sm" color="info">
-                            User Settings
-                          </CButton>
+                            <CIcon name="cil-pen" size="sm" />
+                          </CButton>{" "}
                           <CButton
                             size="sm"
                             color="danger"
                             className="ml-1"
-                            onClick={() => deleteUser(item.id)}
+                            onClick={() => setModalDelete(!modalDelete)}
                           >
-                            Delete
-                          </CButton>
+                            <CIcon name="cil-trash" size="sm" />
+                          </CButton>{" "}
                         </CCardBody>
+                        {/* Start Modal Delete */}
+                        <CModal
+                          show={modalDelete}
+                          onClose={setModalDelete}
+                          color="danger"
+                        >
+                          <CModalHeader closeButton>
+                            <CModalTitle>{i18n.t("Delete")}</CModalTitle>
+                          </CModalHeader>
+                          <CModalBody>
+                            {i18n.t("textDelete", { value: item.username })}
+                          </CModalBody>
+                          <CModalFooter>
+                            <CButton
+                              color="dark"
+                              shape="pill"
+                              variant="ghost"
+                              onClick={() => setModalDelete(false)}
+                            >
+                              {i18n.t("NO")}
+                            </CButton>{" "}
+                            <CButton
+                              shape="pill"
+                              color="danger"
+                              variant="ghost"
+                              onClick={() => deleteUser(item.id)}
+                            >
+                              {i18n.t("Yes")}{" "}
+                              <CIcon name="cil-trash" size="sm" />
+                            </CButton>
+                          </CModalFooter>
+                        </CModal>
+                        {/* End Modal Delete */}
                       </CCollapse>
                     );
                   },
@@ -130,7 +244,7 @@ const ViewUser = (props) => {
             </CCardBody>
             <CCardFooter>
               <CButton block color="info" variant="ghost">
-                {i18n.t("Create")}
+                <CIcon name="cil-user-plus" />
               </CButton>
             </CCardFooter>
           </CCard>
