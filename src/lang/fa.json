@@ -5,6 +5,7 @@
   "Show": "نمایش",
   "Hide": "مخفی",
   "UserName": "نام کاربری",
+  "Username": "نام کاربری",
   "first_name": "نام",
   "last_name": "نام خانوادگی",
   "Users": "کاربران",
@@ -16,5 +17,8 @@
   "Date of registration": "تاریخ ثبت نام",
   "mobile": "شماره موبایل",
   "email": "ایمیل",
-  "role": "نقش"
+  "role": "نقش",
+  "Login": "ورود به سیستم",
+  "Sign In to your account": "به حساب خود وارد شوید",
+  "Password": "گذرواژه"
 }

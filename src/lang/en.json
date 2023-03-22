@@ -4,7 +4,8 @@
   "Edit": "Edit",
   "Show": "Show",
   "Hide": "Hide",
-  "UserName": "User Name",
+  "UserName": "UserName",
+  "Username": "UserName",
   "first_name": "First Name",
   "last_name": "Last Name",
   "Users": "Users",
@@ -16,5 +17,8 @@
   "Date of registration": "Date of Registration",
   "mobile": "Mobile",
   "email": "Email",
-  "role": "Role"
+  "role": "Role",
+  "Login": "Login",
+  "Sign In to your account": "Sign In To Your Account",
+  "Password": "Password"
 }
