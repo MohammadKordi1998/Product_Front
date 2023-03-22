@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import Cookies from "universal-cookie";
 import React, { useState } from "react";
