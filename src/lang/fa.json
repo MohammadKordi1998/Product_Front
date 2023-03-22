@@ -24,5 +24,6 @@
   "Please enter the correct amount": "لطفا مقدار صحیح را وارد کنید",
   "Login was not successful": "ورود موفق نبود",
   "Your login was successful": "ورود شما با موفقیت صورت گرفت",
-  "The username or password is incorrect": "نام کاربری یا پسورد اشتباه است"
+  "The username or password is incorrect": "نام کاربری یا پسورد اشتباه است",
+  "logout": "خروج"
 }

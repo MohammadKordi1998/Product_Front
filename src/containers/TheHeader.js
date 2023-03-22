@@ -12,6 +12,7 @@ import {
   CBreadcrumbRouter,
 } from "@coreui/react";
 import React from "react";
+import i18n from "src/i18n";
 import Cookies from "universal-cookie";
 import CIcon from "@coreui/icons-react";
 import { useSelector, useDispatch } from "react-redux";
@@ -50,6 +51,12 @@ const TheHeader = () => {
     cookies.set("lang", e);
   };
 
+  const LogOut = () => {
+    const cookies = new Cookies();
+    cookies.remove("token");
+    window.location.reload();
+  };
+
   return (
     <CHeader withSubheader>
       <CToggler
@@ -66,14 +73,25 @@ const TheHeader = () => {
         <CIcon name="logo" height="48" alt="Logo" />
       </CHeaderBrand> */}
       <CHeaderNav className="d-md-down-none mr-auto">
-        <CSelect
-          onChange={(e) => changeLanguege(e.target.value)}
-          value={cookies.get("lang")}
-          size="sm"
-        >
-          <option value={"en"}>EN</option>
-          <option value={"fa"}>FA</option>
-        </CSelect>
+        <CHeaderNavItem className="px-1">
+          <CSelect
+            onChange={(e) => changeLanguege(e.target.value)}
+            value={cookies.get("lang")}
+            size="sm"
+          >
+            <option value={"en"}>EN</option>
+            <option value={"fa"}>FA</option>
+          </CSelect>
+        </CHeaderNavItem>
+        <CHeaderNavItem className="px-1">
+          <CIcon
+            height="25"
+            title={i18n.t("logout")}
+            style={{ color: "red" }}
+            name="cil-account-logout"
+            onClick={LogOut}
+          />
+        </CHeaderNavItem>
         {/* <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem> */}

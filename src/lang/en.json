@@ -24,5 +24,6 @@
   "Please enter the correct amount": "Please Enter The Correct Amount",
   "Login was not successful": "Login was not Successful",
   "Your login was successful": "Your Login was Successful",
-  "The username or password is incorrect": "The Username or Password is Incorrect"
+  "The username or password is incorrect": "The Username or Password is Incorrect",
+  "logout": "Logout"
 }
