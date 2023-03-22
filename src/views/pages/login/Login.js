@@ -6,24 +6,31 @@ import {
   CCard,
   CForm,
   CInput,
+  CAlert,
   CSelect,
   CButton,
   CCardBody,
   CCardGroup,
   CContainer,
+  CFormGroup,
   CInputGroup,
   CInputGroupText,
   CInputGroupPrepend,
-  CFormGroup,
 } from "@coreui/react";
 import i18n from "src/i18n";
+import { Fragment } from "react";
 import Validator from "src/Validator";
 import Cookies from "universal-cookie";
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import CIcon from "@coreui/icons-react";
 
 const Login = () => {
+  const refresh = () => window.location.reload();
+  // Start Alert Login or Not Login
+  const [isLogin, setIsLogin] = useState();
+  const [visible, setVisible] = useState();
+  // End Alert Login or Not Login
+
   const [data, setData] = useState({ username: "", password: "" });
   // Start Valid
   const [validUser, setValidUser] = useState(false);
@@ -47,8 +54,36 @@ const Login = () => {
       data.password != null &&
       data.password != ""
     ) {
-      setValidUser(false);
-      setValidPassword(false);
+      fetch("users/login/", {
+        method: "POST",
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status_code) {
+            if (data.status_code == "200") {
+              cookies.set("token", data.result);
+              setVisible(2);
+              setIsLogin(true);
+              setValidUser(false);
+              setValidPassword(false);
+            } else {
+              setVisible(2);
+              setIsLogin(false);
+              setValidUser(false);
+              setValidPassword(false);
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     } else {
       if (
         data.username == undefined ||
@@ -79,6 +114,29 @@ const Login = () => {
           <CCol md="4">
             <CCardGroup>
               <CCard className="p-4">
+                {isLogin == false && (
+                  <CAlert
+                    color="warning"
+                    show={visible}
+                    closeButton
+                    onShowChange={setVisible}
+                  >
+                    {i18n.t("The username or password is incorrect")}
+                  </CAlert>
+                )}
+                {isLogin == true && (
+                  <Fragment>
+                    <CAlert
+                      color="success"
+                      show={visible}
+                      closeButton
+                      onShowChange={setVisible}
+                    >
+                      {i18n.t("Your login was successful")}
+                    </CAlert>
+                    {visible == 0 && refresh()}
+                  </Fragment>
+                )}
                 <CCardBody>
                   <CForm>
                     <CFormGroup row>

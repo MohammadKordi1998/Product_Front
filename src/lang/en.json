@@ -21,5 +21,8 @@
   "Login": "Login",
   "Sign In to your account": "Sign In To Your Account",
   "Password": "Password",
-  "Please enter the correct amount": "Please Enter The Correct Amount"
+  "Please enter the correct amount": "Please Enter The Correct Amount",
+  "Login was not successful": "Login was not Successful",
+  "Your login was successful": "Your Login was Successful",
+  "The username or password is incorrect": "The Username or Password is Incorrect"
 }

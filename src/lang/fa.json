@@ -21,5 +21,8 @@
   "Login": "ورود به سیستم",
   "Sign In to your account": "به حساب خود وارد شوید",
   "Password": "گذرواژه",
-  "Please enter the correct amount": "لطفا مقدار صحیح را وارد کنید"
+  "Please enter the correct amount": "لطفا مقدار صحیح را وارد کنید",
+  "Login was not successful": "ورود موفق نبود",
+  "Your login was successful": "ورود شما با موفقیت صورت گرفت",
+  "The username or password is incorrect": "نام کاربری یا پسورد اشتباه است"
 }
