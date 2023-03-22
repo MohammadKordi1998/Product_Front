@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 import {
   CRow,
@@ -15,22 +16,62 @@ import {
   CInputGroupPrepend,
   CFormGroup,
 } from "@coreui/react";
-import React from "react";
 import i18n from "src/i18n";
+import Validator from "src/Validator";
 import Cookies from "universal-cookie";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import CIcon from "@coreui/icons-react";
 
 const Login = () => {
+  const [data, setData] = useState({ username: "", password: "" });
+  // Start Valid
+  const [validUser, setValidUser] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  // End Valid
+  // Start set Cookie Lang
   const cookies = new Cookies();
-
   const changeLanguege = (e) => {
     window.location.reload();
     cookies.set("lang", e);
   };
+  // End set Cookie Lang
 
-  const APILogin = () => {};
+  // Start Login
+  const APILogin = () => {
+    if (
+      data.username != undefined &&
+      data.username != null &&
+      data.username != "" &&
+      data.password != undefined &&
+      data.password != null &&
+      data.password != ""
+    ) {
+      setValidUser(false);
+      setValidPassword(false);
+    } else {
+      if (
+        data.username == undefined ||
+        data.username == null ||
+        data.username == ""
+      ) {
+        setValidUser(true);
+      } else {
+        setValidUser(false);
+      }
 
+      if (
+        data.password == undefined ||
+        data.password == null ||
+        data.password == ""
+      ) {
+        setValidPassword(true);
+      } else {
+        setValidPassword(false);
+      }
+    }
+  };
+  // End Login
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -58,6 +99,7 @@ const Login = () => {
                     <p className="text-muted">
                       {i18n.t("Sign In to your account")}
                     </p>
+                    {/* Start UserName */}
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -66,10 +108,20 @@ const Login = () => {
                       </CInputGroupPrepend>
                       <CInput
                         type="text"
-                        placeholder={i18n.t("Username")}
+                        value={data.username}
                         autoComplete="username"
+                        onChange={(e) =>
+                          setData({ ...data, username: e.target.value })
+                        }
+                        placeholder={i18n.t("Username")}
                       />
                     </CInputGroup>
+                    <Validator
+                      text={i18n.t("Please enter the correct amount")}
+                      isValid={validUser}
+                    />
+                    {/* End UserName */}
+                    {/* Start Password */}
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -78,10 +130,19 @@ const Login = () => {
                       </CInputGroupPrepend>
                       <CInput
                         type="password"
-                        placeholder={i18n.t("Password")}
+                        value={data.password}
                         autoComplete="current-password"
+                        placeholder={i18n.t("Password")}
+                        onChange={(e) =>
+                          setData({ ...data, password: e.target.value })
+                        }
                       />
                     </CInputGroup>
+                    <Validator
+                      text={i18n.t("Please enter the correct amount")}
+                      isValid={validPassword}
+                    />
+                    {/* End Password */}
                     <CRow>
                       <CCol xs="12">
                         <CButton
